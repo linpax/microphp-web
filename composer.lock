@@ -1,0 +1,213 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "adccf87a8ced408c8af8b6a3826c5263",
+    "packages": [
+        {
+            "name": "linpax/microphp-base",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linpax/microphp-base.git",
+                "reference": "f87e2bcddfce87a4b8fa8190d5c616a16526a19e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linpax/microphp-base/zipball/f87e2bcddfce87a4b8fa8190d5c616a16526a19e",
+                "reference": "f87e2bcddfce87a4b8fa8190d5c616a16526a19e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Micro\\Base\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oleg Lunegov",
+                    "email": "testuser@mail.linpax.org"
+                }
+            ],
+            "description": "MicroPHP base",
+            "time": "2017-07-20 14:07:19"
+        },
+        {
+            "name": "linpax/microphp-framework",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linpax/microphp-framework.git",
+                "reference": "11f3370f3f64c516cce9b84ecd8276c6e9ae8df9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linpax/microphp-framework/zipball/11f3370f3f64c516cce9b84ecd8276c6e9ae8df9",
+                "reference": "11f3370f3f64c516cce9b84ecd8276c6e9ae8df9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "lib-pcre": ">=8.31",
+                "php": ">=5.4.0",
+                "zendframework/zend-diactoros": "^1.3"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.3.*",
+                "phpunit/phpunit": "4.8.x-dev",
+                "phpunit/phpunit-selenium": "2.x-dev",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "suggest": {
+                "ext-curl": "required",
+                "ext-pdo": "required",
+                "ext-pdo_mysql": "required"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Micro\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oleg Lunegov",
+                    "email": "antivir88@mail.ru",
+                    "homepage": "http://linpax.org/",
+                    "role": "Founder and project lead"
+                }
+            ],
+            "description": "Very small framework written on php to create HL-apps using hierarchical MVC pattern",
+            "homepage": "http://micro.linpax.org/",
+            "keywords": [
+                "framework",
+                "microphp"
+            ],
+            "time": "2016-11-09 05:10:08"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06 14:39:51"
+        },
+        {
+            "name": "zendframework/zend-diactoros",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-diactoros.git",
+                "reference": "aadde8887e33fc19d4ee201b8fdb53c18c1d3598"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/aadde8887e33fc19d4ee201b8fdb53c18c1d3598",
+                "reference": "aadde8887e33fc19d4ee201b8fdb53c18c1d3598",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "phpunit/phpunit": "^4.6 || ^5.5",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev",
+                    "dev-develop": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Diactoros\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "PSR HTTP Message implementations",
+            "homepage": "https://github.com/zendframework/zend-diactoros",
+            "keywords": [
+                "http",
+                "psr",
+                "psr-7"
+            ],
+            "time": "2017-04-12 19:29:56"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "linpax/microphp-framework": 20,
+        "linpax/microphp-base": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
