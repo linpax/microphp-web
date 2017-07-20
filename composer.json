@@ -16,7 +16,6 @@
     }
   },
   "require": {
-    "linpax/microphp-framework": "dev-master",
     "linpax/microphp-base": "dev-master"
   }
 }
