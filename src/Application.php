@@ -7,22 +7,16 @@
 
 namespace Micro\Web;
 
-use Micro\Base\Kernel;
-
 
 /**
  * Class Application
  *
  * @package Micro\Web
  */
-class Application implements \Micro\Base\Application
+abstract class Application extends \Micro\Base\Application
 {
-    public function __construct(Kernel $kernel)
+    public function run($request)
     {
-    }
-
-    public function handle()
-    {
-        // TODO: Implement handle() method.
+        return 'sdfsdfsdf';
     }
 }
