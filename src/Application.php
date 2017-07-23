@@ -13,7 +13,7 @@ namespace Micro\Web;
  *
  * @package Micro\Web
  */
-abstract class Application extends \Micro\Base\Application
+class Application extends \Micro\Base\Application
 {
     public function run($request)
     {
