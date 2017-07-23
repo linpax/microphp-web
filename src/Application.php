@@ -7,6 +7,8 @@
 
 namespace Micro\Web;
 
+use Psr\Http\Message\RequestInterface;
+
 
 /**
  * Class Application
@@ -15,8 +17,12 @@ namespace Micro\Web;
  */
 class Application extends \Micro\Base\Application
 {
+    /**
+     * @param RequestInterface $request
+     * @return string
+     */
     public function run($request)
     {
-        return 'sdfsdfsdf';
+        return print_r($request, true);
     }
 }
