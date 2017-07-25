@@ -21,7 +21,7 @@ class Application extends \Micro\Base\Application
      * @param RequestInterface $request
      * @return string
      */
-    public function run()
+    protected function run()
     {
         return print_r($this->getContainer(), true) . print_r($this->getContainer()->get('kernel'), true);
     }
