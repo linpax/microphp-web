@@ -21,8 +21,13 @@ class Application extends \Micro\Base\Application
      * @param RequestInterface $request
      * @return string
      */
-    public function run($request)
+    public function run()
     {
-        return print_r($request, true);
+        return print_r($this->getContainer(), true) . print_r($this->getContainer()->get('kernel'), true);
+    }
+
+    protected function exception($error)
+    {
+        // TODO: Implement exception() method.
     }
 }

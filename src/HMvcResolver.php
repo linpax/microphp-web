@@ -2,15 +2,16 @@
 
 namespace Micro\Web;
 
-use Micro\Base\Exception;
+use Micro\Base\Resolver;
+use Psr\Http\Message\RequestInterface;
 
-use Micro\Base\KernelInjector;
-use Micro\Base\ResolverInterface;
-use Micro\Base\RequestInjector;
-use Psr\Http\Message\ServerRequestInterface;
 
-class HMvcResolver implements ResolverInterface
+class HMvcResolver implements Resolver
 {
+    /** @var RequestInterface $request */
+    private $request;
+
+
     /** @var string $uri converted URL */
     protected $uri;
 
@@ -25,6 +26,16 @@ class HMvcResolver implements ResolverInterface
 
 
     /**
+     * HMvcResolver constructor.
+     *
+     * @param RequestInterface $request
+     */
+    public function __construct($request)
+    {
+        $this->request = $request;
+    }
+
+    /**
      * Get instance application
      *
      * @access public
@@ -34,9 +45,9 @@ class HMvcResolver implements ResolverInterface
      */
     public function getApp()
     {
-        /** @var ServerRequestInterface $request */
+        /** @var ServerRequestInterface $request *
         $request = (new RequestInjector)->build();
-        /** @var array $rawQuery */
+        /** @var array $rawQuery *
         $rawQuery = $request->getQueryParams();
 
         $query = !empty($rawQuery['r']) ? $rawQuery['r'] : '/default';
@@ -46,14 +57,14 @@ class HMvcResolver implements ResolverInterface
 
         $this->initialize();
 
-        /** @var string $cls */
+        /** @var string $cls *
         $cls = $this->getCalculatePath();
 
         if (!class_exists($cls) || !is_subclass_of($cls, '\Micro\Mvc\Controllers\IController')) {
             throw new Exception('Controller '.$cls.' not found or not a valid');
         }
 
-        return new $cls($this->getModules());
+        return new $cls($this->getModules());*/
     }
 
     /**
