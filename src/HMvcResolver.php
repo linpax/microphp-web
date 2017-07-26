@@ -63,7 +63,7 @@ class HMvcResolver implements Resolver
         /** @var string $cls */
         $cls = $this->getCalculatePath();
 
-        if (!class_exists($cls) || !is_subclass_of($cls, '\Micro\Mvc\Controllers\IController')) {
+        if (!class_exists($cls) || !is_subclass_of($cls, '\Micro\Mvc\Controller')) {
             throw new \Exception('Controller '.$cls.' not found or not a valid');
         }
 
