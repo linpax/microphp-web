@@ -3,6 +3,7 @@
 namespace Micro\Web;
 
 use Micro\Base\Resolver;
+use Micro\Router\Web\Router;
 use Psr\Http\Message\RequestInterface;
 
 
@@ -48,26 +49,25 @@ class HMvcResolver implements Resolver
      */
     public function getApp()
     {
-        /** @var ServerRequestInterface $request *
-        $request = (new RequestInjector)->build();
-        /** @var array $rawQuery *
-        $rawQuery = $request->getQueryParams();
+        $rawQuery = [];
+        parse_str($this->request->getUri()->getQuery(), $rawQuery);
 
         $query = !empty($rawQuery['r']) ? $rawQuery['r'] : '/default';
         $query = (substr($query, -1) === '/') ? substr($query, 0, -1) : $query;
 
-        $this->uri = (new RouterInjector)->build()->parse($query, $request->getMethod());
+        $this->uri = (new Router(
+        ))->parse($query, $this->request->getMethod());
 
         $this->initialize();
 
-        /** @var string $cls *
+        /** @var string $cls */
         $cls = $this->getCalculatePath();
 
         if (!class_exists($cls) || !is_subclass_of($cls, '\Micro\Mvc\Controllers\IController')) {
-            throw new Exception('Controller '.$cls.' not found or not a valid');
+            throw new \Exception('Controller '.$cls.' not found or not a valid');
         }
 
-        return new $cls($this->getModules());*/
+        return new $cls($this->getModules());
     }
 
     /**
