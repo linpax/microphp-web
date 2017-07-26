@@ -23,7 +23,11 @@ class Application extends \Micro\Base\Application
      */
     protected function run()
     {
-        return print_r($this->getContainer(), true) . print_r($this->getContainer()->get('kernel'), true);
+        $container = $this->getContainer();
+
+        $resolver = new HMvcResolver($container->get('request'), $container->get('kernel')->getAppDir());
+
+        return print_r($resolver, true);
     }
 
     protected function exception($error)

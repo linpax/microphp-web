@@ -10,6 +10,8 @@ class HMvcResolver implements Resolver
 {
     /** @var RequestInterface $request */
     private $request;
+    /** @var string $appDir */
+    private $appDir;
 
 
     /** @var string $uri converted URL */
@@ -30,8 +32,9 @@ class HMvcResolver implements Resolver
      *
      * @param RequestInterface $request
      */
-    public function __construct($request)
-    {
+    public function __construct(RequestInterface $request, $appDir)
+    { // app dir //query params
+        $this->appDir = $appDir;
         $this->request = $request;
     }
 
@@ -91,20 +94,22 @@ class HMvcResolver implements Resolver
         $this->prepareAction($uriBlocks);
 
         if ($params) {
-            $paramBlocks = explode('&', $params);
-            $query = (new RequestInjector)->build()->getQueryParams();
+            $query = [];
+            parse_str($this->request->getUri()->getQuery(), $query);
 
+
+            $paramBlocks = explode('&', $params);
             foreach ($paramBlocks AS $param) {
                 $val = explode('=', $param);
 
                 $query[$val[0]] = $val[1];
             }
 
-            // replace request
-            $request = (new RequestInjector)->build();
-            (new RequestInjector)->addRequirement('request', $request->withQueryParams(
-                array_replace_recursive($request->getQueryParams(), $query)
-            ));
+            $this->request = $this->request->withUri(
+                $this->request->getUri()->withQuery(
+                    http_build_query($query)
+                )
+            );
         }
     }
 
@@ -121,7 +126,7 @@ class HMvcResolver implements Resolver
     protected function prepareExtensions(&$uriBlocks)
     {
         foreach ($uriBlocks as $i => $block) {
-            if (file_exists((new KernelInjector)->build()->getAppDir().$this->extensions.'/extensions/'.$block)) {
+            if (file_exists($this->appDir.$this->extensions.'/extensions/'.$block)) {
                 $this->extensions .= '/Extensions/'.ucfirst($block);
 
                 unset($uriBlocks[$i]);
@@ -147,7 +152,7 @@ class HMvcResolver implements Resolver
      */
     protected function prepareModules(&$uriBlocks)
     {
-        $path = (new KernelInjector)->build()->getAppDir().($this->extensions ?: '');
+        $path = $this->appDir.($this->extensions ?: '');
 
         foreach ($uriBlocks as $i => $block) {
             if ($block && file_exists($path.strtolower($this->modules).'/modules/'.$block)) {
@@ -174,7 +179,7 @@ class HMvcResolver implements Resolver
      */
     protected function prepareController(&$uriBlocks)
     {
-        $path = (new KernelInjector)->build()->getAppDir().($this->extensions ?: '').strtolower($this->modules ?: '');
+        $path = $this->appDir.($this->extensions ?: '').strtolower($this->modules ?: '');
         $str = array_shift($uriBlocks);
 
         if (file_exists(str_replace('\\', '/', $path.'/controllers/'.ucfirst($str).'Controller.php'))) {
