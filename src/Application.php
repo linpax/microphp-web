@@ -27,7 +27,12 @@ class Application extends \Micro\Base\Application
 
         $resolver = new HMvcResolver($container->get('request'), $container->get('kernel')->getAppDir());
 
-        return print_r($resolver, true) . print_r($resolver->getApp());
+        $app = $resolver->getApp();
+        $action = $resolver->getAction();
+
+        $response = $app->action((string)$action);
+
+        return print_r($app, true) . print_r($action, true) . print_r($response, true);
     }
 
     protected function exception($error)
