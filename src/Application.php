@@ -32,7 +32,7 @@ class Application extends \Micro\Base\Application
 
         $response = $app->action((string)$action);
 
-        return print_r($app, true) . print_r($action, true) . print_r($response, true);
+        return print_r($action, true) . print_r($response, true);
     }
 
     protected function exception($error)
