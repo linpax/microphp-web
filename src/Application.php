@@ -18,7 +18,6 @@ use Psr\Http\Message\RequestInterface;
 class Application extends \Micro\Base\Application
 {
     /**
-     * @param RequestInterface $request
      * @return string
      */
     protected function run()
@@ -32,7 +31,7 @@ class Application extends \Micro\Base\Application
 
         $response = $app->action((string)$action);
 
-        return print_r($action, true) . print_r($response, true);
+        return $response;
     }
 
     protected function exception($error)
