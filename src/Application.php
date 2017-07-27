@@ -22,16 +22,12 @@ class Application extends \Micro\Base\Application
      */
     protected function run()
     {
-        $container = $this->getContainer();
-
-        $resolver = new HMvcResolver($container->get('request'), $container->get('kernel')->getAppDir());
+        $resolver = $this->getContainer()->get('resolver');
 
         $app = $resolver->getApp();
         $action = $resolver->getAction();
 
-        $response = $app->action((string)$action);
-
-        return $response;
+        return $app->action((string)$action);
     }
 
     protected function exception($error)
