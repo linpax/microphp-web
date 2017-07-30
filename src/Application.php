@@ -27,7 +27,7 @@ class Application extends \Micro\Base\Application
         /** @var Controller $controller */
         $controller = $resolver->getController();
 
-        return $controller->action((string)$resolver->getAction());
+        return $controller->action((string)$resolver->getActionName(), $this->getContainer());
     }
 
     protected function exception($error)
