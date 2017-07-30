@@ -7,7 +7,7 @@
 
 namespace Micro\Web;
 
-use Psr\Http\Message\RequestInterface;
+use Micro\Mvc\Controller;
 
 
 /**
@@ -22,12 +22,12 @@ class Application extends \Micro\Base\Application
      */
     protected function run()
     {
+        /** @var HMvcResolver $resolver */
         $resolver = $this->getContainer()->get('resolver');
+        /** @var Controller $controller */
+        $controller = $resolver->getController();
 
-        $app = $resolver->getApp();
-        $action = $resolver->getAction();
-
-        return $app->action((string)$action);
+        return $controller->action((string)$resolver->getAction());
     }
 
     protected function exception($error)

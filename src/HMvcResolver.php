@@ -47,7 +47,7 @@ class HMvcResolver implements Resolver
      * @return IController
      * @throws Exception
      */
-    public function getApp()
+    public function getController()
     {
         $rawQuery = [];
         parse_str($this->request->getUri()->getQuery(), $rawQuery);
@@ -215,7 +215,7 @@ class HMvcResolver implements Resolver
      */
     public function getCalculatePath()
     {
-        return '\\App'.$this->getExtensions().$this->getModules().'\\Controllers\\'.$this->getController();
+        return '\\App'.$this->getExtensions().$this->getModules().'\\Controllers\\'.$this->getControllerName();
     }
 
     /**
@@ -249,7 +249,7 @@ class HMvcResolver implements Resolver
      *
      * @return string
      */
-    public function getController()
+    public function getControllerName()
     {
         return ucfirst($this->controller).'Controller';
     }
@@ -261,7 +261,7 @@ class HMvcResolver implements Resolver
      *
      * @return string
      */
-    public function getAction()
+    public function getActionName()
     {
         return $this->action;
     }
