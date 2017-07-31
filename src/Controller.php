@@ -14,11 +14,15 @@ class Controller implements \Micro\Mvc\Controller
 {
     /** @var Container $container */
     protected $container;
+    /** @var \Micro\Mvc\View $view */
+    protected $view;
 
     public function action($name, $container)
     {
         $this->container = $container;
 
-        return $this->{'action'.ucfirst($name)}();
+        $this->view = $this->container->get('view') ?: new View(new PhpRender);
+
+        return $this->view->rendering( $this->{'action'.ucfirst($name)}() );
     }
 }

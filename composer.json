@@ -18,6 +18,7 @@
   "require": {
     "linpax/microphp-base": "dev-master",
     "linpax/microphp-router-web": "dev-master",
-    "linpax/microphp-mvc": "dev-master"
+    "linpax/microphp-mvc": "dev-master",
+    "linpax/microphp-html": "dev-master"
   }
 }
