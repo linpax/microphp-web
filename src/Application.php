@@ -7,8 +7,6 @@
 
 namespace Micro\Web;
 
-use Micro\Mvc\Controller;
-
 
 /**
  * Class Application
@@ -19,15 +17,14 @@ class Application extends \Micro\Base\Application
 {
     /**
      * @return string
+     * @throws \Exception
      */
     protected function run()
     {
         /** @var HMvcResolver $resolver */
         $resolver = $this->getContainer()->get('resolver');
-        /** @var Controller $controller */
-        $controller = $resolver->getController();
 
-        return $controller->action((string)$resolver->getActionName(), $this->getContainer());
+        return $resolver->getController()->action((string)$resolver->getActionName(), $this->getContainer());
     }
 
     protected function exception($error)

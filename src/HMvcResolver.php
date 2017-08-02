@@ -44,8 +44,8 @@ class HMvcResolver implements Resolver
      *
      * @access public
      *
-     * @return IController
-     * @throws Exception
+     * @return \Micro\Mvc\Controller
+     * @throws \Exception
      */
     public function getController()
     {

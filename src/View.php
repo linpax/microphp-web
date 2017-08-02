@@ -8,36 +8,23 @@
 namespace Micro\Web;
 
 use Micro\Html\Html;
-use Micro\Mvc\Render;
 
 
 class View implements \Micro\Mvc\View
 {
-    /** @var Render $render */
-    protected $render;
     /** @var array $params */
     protected $params;
     /** @var array $styleScripts */
     protected $styleScripts;
 
 
-    public function __construct($render)
-    {
-        $this->render = $render;
-    }
-
     public function addParameter($name, $value)
     {
         $this->params[$name] = $value;
     }
-
-
-    public function rendering($source)
+    public function getParameters()
     {
-        return $this->render->rendering(
-            $this->insertStyleScripts($source),
-            $this->params
-        );
+        return $this->params;
     }
 
 
