@@ -55,6 +55,8 @@ class Controller implements \Micro\Mvc\Controller
             $this->afterAction();
         }
 
-        return $this->response->withBody($this->container->get('renderer')->render( $this->view));
+        $this->response->getBody()->write( $this->container->get('renderer')->render($this->view) );
+
+        return $this->response;
     }
 }
