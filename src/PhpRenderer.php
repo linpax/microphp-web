@@ -25,6 +25,6 @@ class PhpRenderer implements Renderer
      */
     public function render(View $view)
     {
-        return json_encode($view);
+        return json_encode($view->getParameters());
     }
 }
