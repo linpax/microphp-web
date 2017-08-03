@@ -14,6 +14,12 @@ use \Micro\Mvc\View;
 class PhpRenderer implements Renderer
 {
     /**
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * @param View $view
      * @return string
      */
