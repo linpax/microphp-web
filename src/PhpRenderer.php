@@ -39,7 +39,9 @@ class PhpRenderer implements Renderer
             return false;
         }
 
-        $viewFilename = $view->getPath().'/'.$view->getView().'.'.ltrim($this->viewExtension, '.');
+        $viewFilename = $this->getViewFile($view->getPath(), $view->getView());
+
+//        $viewFilename = $view->getPath().'/'.$view->getView().'.'.ltrim($this->viewExtension, '.');
         if (!file_exists($viewFilename)) { /// ALARM
             return false;
         }
@@ -68,6 +70,7 @@ class PhpRenderer implements Renderer
 
         return $source;
     }
+
     protected function getLayoutFile($appDir, $module, $layoutName)
     {
         if ($module) {
@@ -88,6 +91,36 @@ class PhpRenderer implements Renderer
         }
 
         return false;
+    }
+    protected function getViewFile($controllerClass, $view)
+    {
+        $path = '';
+
+        // Calculate path to view
+        if (0 === strpos($controllerClass, 'App')) {
+            $path = $this->applicationDir;
+        } else {
+            //$path = $this->;
+        }
+
+        $cl = strtolower(dirname(str_replace('\\', '/', $controllerClass)));
+        $cl = substr($cl, strpos($cl, '/'));
+
+        if (false) {
+            //$path .= $cl.'/views/'.$view.'.php';
+        } else {
+            $className = str_replace('controller', '',
+                strtolower(basename(str_replace('\\', '/', '/'.$controllerClass))));
+            $path .= dirname($cl).'/views/'.$className.'/'.$view.'.php';
+        }
+
+        $path = str_replace('//', '/', $path);
+
+        if (!file_exists($path)) {
+            throw new \Exception('View path `'.$path.'` not exists.');
+        }
+
+        return $path;
     }
 
     protected function renderFile($fileName, array $data = [])
