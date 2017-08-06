@@ -7,15 +7,21 @@
 
 namespace Micro\Web;
 
-use Micro\Html\Html;
-
 
 class View implements \Micro\Mvc\View
 {
+    /** @var string $layout */
+    protected $layout;
+    /** @var string $view */
+    protected $view;
+    /** @var string $module */
+    protected $module;
+    /** @var string $path */
+    protected $path;
+    /** @var string $data */
+    protected $data;
     /** @var array $params */
     protected $params;
-    /** @var array $styleScripts */
-    protected $styleScripts;
 
 
     public function addParameter($name, $value)
@@ -27,112 +33,48 @@ class View implements \Micro\Mvc\View
         return $this->params;
     }
 
-
-    /**
-     * Insert styles and scripts into cache
-     *
-     * @access protected
-     *
-     * @param string $cache cache of generated page
-     *
-     * @return string
-     */
-    protected function insertStyleScripts($cache)
+    public function setLayout($name)
     {
-        $heads = '';
-        $ends = '';
-        $result = '';
-
-        foreach ($this->styleScripts AS $element) {
-            if ($element['isHead']) {
-                $heads .= $element['body'];
-            } else {
-                $ends .= $element['body'];
-            }
-        }
-
-        $positionHead = strpos($cache, Html::closeTag('head'));
-        $positionBody = strpos($cache, Html::closeTag('body'), $positionHead);
-
-        $result .= substr($cache, 0, $positionHead);
-        $result .= $heads;
-        $result .= substr($cache, $positionHead, $positionBody);
-        $result .= $ends;
-        $result .= substr($cache, $positionHead + $positionBody);
-
-        return $result;
+        $this->layout = $name;
+    }
+    public function getLayout()
+    {
+        return $this->layout;
     }
 
-
-    /**
-     * Register JS script
-     *
-     * @access public
-     *
-     * @param string $source file name
-     * @param bool $isHead is head block
-     *
-     * @return void
-     */
-    public function registerScript($source, $isHead = true)
+    public function setView($name)
     {
-        $this->styleScripts[] = [
-            'isHead' => $isHead,
-            'body' => Html::script($source)
-        ];
+        $this->view = $name;
+    }
+    public function getView()
+    {
+        return $this->view;
     }
 
-    /**
-     * Register JS file
-     *
-     * @access public
-     *
-     * @param string $source file name
-     * @param bool $isHead is head block
-     *
-     * @return void
-     */
-    public function registerScriptFile($source, $isHead = true)
+    public function setModulePath($module)
     {
-        $this->styleScripts[] = [
-            'isHead' => $isHead,
-            'body' => Html::scriptFile($source)
-        ];
+        $this->module = $module;
+    }
+    public function getModulePath()
+    {
+        return $this->module;
     }
 
-    /**
-     * Register CSS code
-     *
-     * @access public
-     *
-     * @param string $source file name
-     * @param bool $isHead is head block
-     *
-     * @return void
-     */
-    public function registerCss($source, $isHead = true)
+    public function setPath($viewDir)
     {
-        $this->styleScripts[] = [
-            'isHead' => $isHead,
-            'body' => Html::css($source)
-        ];
+        $this->path = $viewDir;
+    }
+    public function getPath()
+    {
+        return $this->path;
     }
 
-    /**
-     * Register CSS file
-     *
-     * @access public
-     *
-     * @param string $source file name
-     * @param bool $isHead is head block
-     *
-     * @return void
-     */
-    public function registerCssFile($source, $isHead = true)
+    public function setData($source)
     {
-        $this->styleScripts[] = [
-            'isHead' => $isHead,
-            'body' => Html::cssFile($source)
-        ];
+        $this->data = $source;
+    }
+    public function getData()
+    {
+        return $this->data;
     }
 }
