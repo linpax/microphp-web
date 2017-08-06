@@ -48,6 +48,14 @@ class Controller implements \Micro\Mvc\Controller
         $this->container = $container;
 
         $this->view = $this->container->get('view') ?: new View;
+        $this->view->setView($name);
+
+        $this->view->setPath(get_called_class());
+
+        if ($this->module) {
+            $this->view->setModulePath(get_class($this->module));
+        }
+
         $this->response = $this->container->get('response') ?: new Response;
 
         if ($this->beforeAction()) {
