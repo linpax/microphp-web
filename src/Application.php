@@ -6,6 +6,7 @@
  */
 
 namespace Micro\Web;
+use Psr\Http\Message\ResponseInterface;
 
 
 /**
@@ -30,5 +31,19 @@ class Application extends \Micro\Base\Application
     protected function exception($error)
     {
         die(var_dump($this));
+    }
+
+    /**
+     * @param ResponseInterface $response
+     */
+    public function terminate($response)
+    {
+        header('HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
+
+        foreach ($response->getHeaders() as $header => $values) {
+            header("    %s: %s\n", $header, implode(', ', $values));
+        }
+
+        echo $response->getBody();
     }
 }
