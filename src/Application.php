@@ -29,6 +29,6 @@ class Application extends \Micro\Base\Application
 
     protected function exception($error)
     {
-        // TODO: Implement exception() method.
+        die(var_dump($this));
     }
 }

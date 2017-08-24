@@ -29,7 +29,7 @@ class Controller implements \Micro\Mvc\Controller
         if ($module) {
             $className = '\\App'.$module.'\\'.ucfirst(basename(str_replace('\\', '/', $module))).'Module';
 
-            if (class_exists($className) && is_subclass_of($className, '\Micro\Mvc\Module')) {
+            if (class_exists($className) && is_subclass_of($className, '\\Micro\\Mvc\\Module')) {
                 $this->module = new $className();
             }
         }
@@ -58,8 +58,12 @@ class Controller implements \Micro\Mvc\Controller
 
         $this->response = $this->container->get('response') ?: new Response;
 
+        if (!method_exists($this, 'action'.ucfirst($name))) {
+            throw new \Exception('Action `'.$name.'` not found into ' . get_class($this));
+        }
+
         if ($this->beforeAction()) {
-            $this->{'action'.$name}(); // REAL WORK
+            $this->{'action'.ucfirst($name)}(); // REAL WORK
             $this->afterAction();
         }
 
